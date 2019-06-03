@@ -16,6 +16,21 @@ Provides the accuracy, recall, and false positive rates, given the actual values
 #### Accuracy
 Returns the R-squared, Mean squared, and Root Mean Sqared error metrics on the data, given the actual values and the values predicted by the ML model.
 ## Linear regression
+### Coefficient evaluation
+#### Standard Error (SE)
+The standard error is an estimate of the standard deviation of the coefficient. Provides the standard error for each beta coefficient, and each dependent variable in the model. Only meaningful during the training phase.
+#### T-statistic
+The t statistic is the coefficient divided by its standard error. A larger absolute value of the T-statistic indicates that the coefficient is more significant.
+#### P-value
+Tests the null hypothesis that a given coefficient is insignificant. A low P-value indicates that the coefficient is significant. A high P-value indicates that the coefficient is insignificant.
+#### Confidence Interval
+The Confidence Interval determines the interval within which each estimated coefficient must exist to satisfy a given confidence level that is required
+### Model evaluation
+#### Analysis of Variance (ANOVA)
+#### R-squared
+#### Adjusted R-squared
+#### F-Test
+#### Akaike Information Criterion (AIC)
 ## Logistic regression
 ## Clustering
 ## SVM
