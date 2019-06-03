@@ -50,7 +50,23 @@ A normalized version of R Squared that does not arbitrarily increase with the nu
 A measure of the likelihood that all coefficients of the model are insignificant. It indicates whether the regression model created provides a better fit to the data than a model that contains no independent variables.
 #### Akaike Information Criterion (AIC)
 AIC is an Information Theory based criterion for assessing Goodness of Fit. It is used to create a *ranking* of various models, rather than to provide an absolute measure of quality. A smaller value indicates a better fit.
+## Support Vector Machines
+### Classification
+#### Report (Confusion matrix)
+Returns the confusion matrix containing the number of predicted values for each pair of predicted and actual labels.
+#### N-Fold cross validation
+Cross validates the model across different datasets, each characterised by a different work unit id. The validation metrics used are as follows
+
+Metric |
+------ |
+Mean squared error |
+Number of correct values |
+R squared error |
+
+### Regression
+#### N-Fold cross validation
 ## Logistic regression
-## Clustering
-## SVM
-## NLP
+## General Linear Model
+## Learning Trees
+## K-Means
+## Text Vectors
