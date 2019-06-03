@@ -9,12 +9,34 @@ Returns the number and percentage of records that belong to each class in a clas
 #### Confusion matrix
 Returns the Confusion Matrix, counting the number of records present for each combination of predicted Class and actual Class, given the actual values and the values predicted by the ML model.
 #### Accuracy
-Returns the accuracy of the prediction, given the actual values and the values predicted by the ML model.
+Returns the accuracy of the prediction, given the actual values and the values predicted by the ML model. Evaluates the model based on the following metrics
+
+| Metric | Explanation |
+| --- | --- |
+| Error Count | The number of misclassified samples. |
+| Raw Accuracy | The percentage of samples properly classified (0.0 - 1.0). |
+| PoD | Power of Discrimination. |
+| PoDE | Power of Discrimination Extended. |
+
 #### Accuracy by class
-Provides the accuracy, recall, and false positive rates, given the actual values and the values predicted by the ML model.
+Provides the following metrics, given the actual values and the values predicted by the ML model.
+
+| Metric |
+| --- |
+| Accuracy |
+| Recall |
+| False positive rates |
+
 ### Regression
 #### Accuracy
-Returns the R-squared, Mean squared, and Root Mean Sqared error metrics on the data, given the actual values and the values predicted by the ML model.
+Returns the following metrics on the data, given the actual values and the values predicted by the ML model.
+
+Metric |
+------ |
+Mean squared error |
+Root mean squared error |
+R squared error |
+
 ## Linear regression
 ### Coefficient evaluation
 #### Standard Error (SE)
@@ -62,8 +84,25 @@ Mean squared error |
 Number of correct values |
 R squared error |
 
+## Learning Trees
+### Boosted Regression Forests
+#### Accuracy
+Provides regression accuracy. Equivalent to the regression accuracy metric in ML Core.
+#### Feature importance
+Determine the relative importance of features in the decision process of the model.
+### Classification forest
+#### Accuracy
+Provides classification accuracy. Equivalent to the classification accuracy metric in ML Core.
+#### Accuracy by class
+Provides class-wise classification accuracy metrics. Equivalent to the accuracy by class metric in ML Core.
+#### Feature importance
+#### Decision distance matrix
+Calculates a matrix of distances between data points in Random Forest Decision Space
+#### Confusion matrix
+Provides the confusion matrix for the result. Equivalent to the confusion matrix metric in ML Core.
+#### Uniqueness factor
+Uniqueness Factor is an experimental metric that determines how far a given point is from a set of other points.
 ## Logistic regression
 ## General Linear Model
-## Learning Trees
 ## K-Means
 ## Text Vectors
