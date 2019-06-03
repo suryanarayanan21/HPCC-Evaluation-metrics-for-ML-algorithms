@@ -12,6 +12,9 @@ Returns the Confusion Matrix, counting the number of records present for each co
 Returns the accuracy of the prediction, given the actual values and the values predicted by the ML model.
 #### Accuracy by class
 Provides the accuracy, recall, and false positive rates, given the actual values and the values predicted by the ML model.
+### Regression
+#### Accuracy
+Returns the R-squared, Mean squared, and Root Mean Sqared error metrics on the data, given the actual values and the values predicted by the ML model.
 ## Linear regression
 ## Logistic regression
 ## Clustering
