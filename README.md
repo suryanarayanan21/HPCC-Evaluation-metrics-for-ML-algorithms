@@ -102,6 +102,15 @@ Calculates a matrix of distances between data points in Random Forest Decision S
 Provides the confusion matrix for the result. Equivalent to the confusion matrix metric in ML Core.
 #### Uniqueness factor
 Uniqueness Factor is an experimental metric that determines how far a given point is from a set of other points.
+### Learning Forests
+#### Feature importance
+#### Uniqueness factor
+#### Decision distance matrix
+### Regression Forests
+#### Feature importance
+#### Uniqueness factor
+#### Decision distance matrix
+#### Accuracy
 ## Logistic regression
 ## General Linear Model
 ## K-Means
