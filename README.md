@@ -15,8 +15,8 @@ Returns the accuracy of the prediction, given the actual values and the values p
 | --- | --- |
 | Error Count | The number of misclassified samples. |
 | Raw Accuracy | The percentage of samples properly classified (0.0 - 1.0). |
-| PoD | Power of Discrimination. |
-| PoDE | Power of Discrimination Extended. |
+| PoD | Power of Discrimination. Compares the performance of the classification against random guessing |
+| PoDE | Power of Discrimination Extended. Compares the performance of the classification against always choosing the most frequent class |
 
 #### Accuracy by class
 Provides the following metrics, given the actual values and the values predicted by the ML model.
@@ -90,7 +90,7 @@ R squared error |
 Provides regression accuracy. Equivalent to the regression accuracy metric in ML Core.
 #### Feature importance
 Determine the relative importance of features in the decision process of the model.
-### Classification forest
+### Classification Forests
 #### Accuracy
 Provides classification accuracy. Equivalent to the classification accuracy metric in ML Core.
 #### Accuracy by class
