@@ -27,7 +27,23 @@ Tests the null hypothesis that a given coefficient is insignificant. A low P-val
 The Confidence Interval determines the interval within which each estimated coefficient must exist to satisfy a given confidence level that is required
 ### Model evaluation
 #### Analysis of Variance (ANOVA)
+The analysis of variance report provides an analysis of the various sources of variance produced in the predicted dependent data provided. It details the amount of variance explained by the model, and the unexplained variance due to error. The various metrics provided are as follows
+
+Metric | Explanation
+------ | -----------
+Total_SS | Total Sum of Squares (SS) variance of the dependent data.
+Model_SS | The SS variance represented within the model.
+Error_SS | The SS variance not reflected by the model.
+Total_DF | The total degrees of freedom within the dependent data.
+Model_DF | Degrees of freedom of the model.
+Error_DF | Degrees of freedom of the error component.
+Total_MS | The Mean Square (MS) variance of the dependent data.
+Model_MS | MS variance represented within the model.
+Error_MS | MS variance not reflected by the model.
+Model_F  | The F-Test statistic: Model_MS / Error_MS.
+
 #### R-squared
+Statistical measure of how close the data are to the fitted regression line.
 #### Adjusted R-squared
 #### F-Test
 #### Akaike Information Criterion (AIC)
