@@ -15,8 +15,8 @@ Returns the accuracy of the prediction, given the actual values and the values p
 | --- | --- |
 | Error Count | The number of misclassified samples. |
 | Raw Accuracy | The percentage of samples properly classified (0.0 - 1.0). |
-| PoD | Power of Discrimination. Compares the performance of the classification against random guessing |
-| PoDE | Power of Discrimination Extended. Compares the performance of the classification against always choosing the most frequent class |
+| PoD | Power of Discrimination. Compares the performance of the classification model against random guessing |
+| PoDE | Power of Discrimination Extended. Compares the performance of the classification model against always choosing the most frequent class |
 
 #### Accuracy by class
 Provides the following metrics, given the actual values and the values predicted by the ML model.
