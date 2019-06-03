@@ -51,8 +51,7 @@ A measure of the likelihood that all coefficients of the model are insignificant
 #### Akaike Information Criterion (AIC)
 AIC is an Information Theory based criterion for assessing Goodness of Fit. It is used to create a *ranking* of various models, rather than to provide an absolute measure of quality. A smaller value indicates a better fit.
 ## Support Vector Machines
-### Classification
-#### Report (Confusion matrix)
+#### Report (Confusion matrix, Classification only)
 Returns the confusion matrix containing the number of predicted values for each pair of predicted and actual labels.
 #### N-Fold cross validation
 Cross validates the model across different datasets, each characterised by a different work unit id. The validation metrics used are as follows
@@ -63,8 +62,6 @@ Mean squared error |
 Number of correct values |
 R squared error |
 
-### Regression
-#### N-Fold cross validation
 ## Logistic regression
 ## General Linear Model
 ## Learning Trees
