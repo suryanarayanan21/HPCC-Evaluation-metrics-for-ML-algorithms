@@ -43,10 +43,13 @@ Error_MS | MS variance not reflected by the model.
 Model_F  | The F-Test statistic: Model_MS / Error_MS.
 
 #### R-squared
-Statistical measure of how close the data are to the fitted regression line.
+Statistical measure of how close the data points are to the fitted regression line.
 #### Adjusted R-squared
+A normalized version of R Squared that does not arbitrarily increase with the number of features
 #### F-Test
+A measure of the likelihood that all coefficients of the model are insignificant. It indicates whether the regression model created provides a better fit to the data than a model that contains no independent variables.
 #### Akaike Information Criterion (AIC)
+AIC is an Information Theory based criterion for assessing Goodness of Fit. It is used to create a *ranking* of various models, rather than to provide an absolute measure of quality. A smaller value indicates a better fit.
 ## Logistic regression
 ## Clustering
 ## SVM
