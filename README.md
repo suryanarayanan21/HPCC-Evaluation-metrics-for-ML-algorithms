@@ -2,6 +2,19 @@
 Evaluation metrics that may be used to monitor the performance of Machine Learning algorithms used by the HPCC production ML bundles.
 The code is written in ECL, the language used by the HPCC framework.
 # Summary of existing Evaluation Metrics
+## Overview
+| Module | Type | Metrics |
+| --- | --- | --- |
+| ML Core | Classification | Class Stats \| Confusion matrix \| Accuracy \| Accuracy by class |
+| | Regression | Accuracy |
+| Linear Regression | Coefficients | Standard Error \| T-statistic \| P-value \| Confidence interval |
+| | Model | ANOVA \| R2 \| Adjusted R2 \| F Test \| AIC |
+| SVM | Classification | Confusion matrix \| N-Fold cross validation |
+| | Regression | N-Fold cross validation |
+| Learning Trees | Boosted regression forests | Accuracy \| Feature importance |
+| | Classification forests | Accuracy \| Accuracy by class \| Feature importance \| Decision distance matrix \| Confusion matrix \| Uniqueness factor |
+| | Learning forests | Feature importance \| Uniqueness factor \| Decision distance matrix |
+| | Regression forests | Feature importance \| Uniqueness factor \| Decision distance matrix \| Accuracy |
 ## General ML Core module
 ### Classification
 #### Class stats
