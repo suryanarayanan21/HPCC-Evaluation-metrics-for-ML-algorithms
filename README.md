@@ -19,7 +19,7 @@ The code is written in ECL, the language used by the HPCC framework.
 | | Learning forests | Feature importance \| Uniqueness factor \| Decision distance matrix |
 | | Regression forests | Feature importance \| Uniqueness factor \| Decision distance matrix \| Accuracy |
 | [Logistic Regression](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#logistic-regression) | | Binomial Confusion matrix \| Confusion matrix \| Deviance analysis \| Deviance detail \| Model deviance \| Null deviance |
-| [GLM](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#general-linear-model) | | |
+| [GLM](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#general-linear-model) | | Binomial Confusion matrix \| Confusion matrix \| Deviance analysis \| Deviance detail \| Model deviance \| Null deviance |
 | [K-Means](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#k-means) | | - |
 | [Text Vectors](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#text-vectors) | | - |
 ## General ML Core module
@@ -131,7 +131,7 @@ Uniqueness Factor is an experimental metric that determines how far a given poin
 #### Uniqueness factor
 #### Decision distance matrix
 #### Accuracy
-## Logistic regression
+## General Linear Model
 #### Binomial Confusion matrix
 Computes the confusion matrix for a single response. Work items with multinomial responses are ignored by this function.
 #### Confusion matrix
@@ -161,7 +161,10 @@ Creates a report of deviance for a model, in the deviance detail format.
 
 #### Null deviance
 Return Deviance information for the null model, which is a model with only an intercept.
-## General Linear Model
+
+## Logistic regression
+Logistic regression has similar metrics as those used in General Linear Model, as the general linear model is a superset of the logistic regression model. These metrics are just fine tuned to work better with Logistic regression.
+
 ## K-Means
 No evaluation metrics have been implemented in this module.
 ## Text Vectors
