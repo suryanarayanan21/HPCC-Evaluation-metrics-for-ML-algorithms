@@ -18,7 +18,7 @@ The code is written in ECL, the language used by the HPCC framework.
 | | Classification forests | Accuracy \| Accuracy by class \| Feature importance \| Decision distance matrix \| Confusion matrix \| Uniqueness factor |
 | | Learning forests | Feature importance \| Uniqueness factor \| Decision distance matrix |
 | | Regression forests | Feature importance \| Uniqueness factor \| Decision distance matrix \| Accuracy |
-| [Logistic Regression](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#logistic-regression) | | |
+| [Logistic Regression](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#logistic-regression) | | Binomial Confusion matrix \| Confusion matrix \| Deviance analysis \| Deviance detail \| Model deviance \| Null deviance |
 | [GLM](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#general-linear-model) | | |
 | [K-Means](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#k-means) | | - |
 | [Text Vectors](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#text-vectors) | | - |
