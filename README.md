@@ -18,9 +18,9 @@ The code is written in ECL, the language used by the HPCC framework.
 | | Classification forests | Accuracy \| Accuracy by class \| Feature importance \| Decision distance matrix \| Confusion matrix \| Uniqueness factor |
 | | Learning forests | Feature importance \| Uniqueness factor \| Decision distance matrix |
 | | Regression forests | Feature importance \| Uniqueness factor \| Decision distance matrix \| Accuracy |
-| [K-Means](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#k-means) | | - |
 | [Logistic Regression](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#logistic-regression) | | |
 | [GLM](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#general-linear-model) | | |
+| [K-Means](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#k-means) | | - |
 | [Text Vectors](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#text-vectors) | | - |
 ## General ML Core module
 ### Classification
@@ -131,9 +131,9 @@ Uniqueness Factor is an experimental metric that determines how far a given poin
 #### Uniqueness factor
 #### Decision distance matrix
 #### Accuracy
-## K-Means
-No evaluation metrics have been implemented in this module.
 ## Logistic regression
 ## General Linear Model
+## K-Means
+No evaluation metrics have been implemented in this module.
 ## Text Vectors
 No evaluation metrics have been implemented in this module.
