@@ -8,18 +8,20 @@ The code is written in ECL, the language used by the HPCC framework.
 
 | Module | Type | Metrics |
 | --- | --- | --- |
-| ML Core | Classification | Class Stats \| Confusion matrix \| Accuracy \| Accuracy by class |
+| [ML Core](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#general-ml-core-module) | Classification | Class Stats \| Confusion matrix \| Accuracy \| Accuracy by class |
 | | Regression | Accuracy |
-| Linear Regression | Coefficients | Standard Error \| T-statistic \| P-value \| Confidence interval |
+| [Linear Regression](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#linear-regression) | Coefficients | Standard Error \| T-statistic \| P-value \| Confidence interval |
 | | Model | ANOVA \| R2 \| Adjusted R2 \| F Test \| AIC |
-| SVM | Classification | Confusion matrix \| N-Fold cross validation |
+| [SVM](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#support-vector-machines) | Classification | Confusion matrix \| N-Fold cross validation |
 | | Regression | N-Fold cross validation |
-| Learning Trees | Boosted regression forests | Accuracy \| Feature importance |
+| [Learning Trees](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#learning-trees) | Boosted regression forests | Accuracy \| Feature importance |
 | | Classification forests | Accuracy \| Accuracy by class \| Feature importance \| Decision distance matrix \| Confusion matrix \| Uniqueness factor |
 | | Learning forests | Feature importance \| Uniqueness factor \| Decision distance matrix |
 | | Regression forests | Feature importance \| Uniqueness factor \| Decision distance matrix \| Accuracy |
-| K-Means | | - |
-| Text Vectors | | - |
+| [K-Means](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#k-means) | | - |
+| [Logistic Regression](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#logistic-regression) | | |
+| [GLM](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#general-linear-model) | | |
+| [Text Vectors](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/README.md#text-vectors) | | - |
 ## General ML Core module
 ### Classification
 #### Class stats
