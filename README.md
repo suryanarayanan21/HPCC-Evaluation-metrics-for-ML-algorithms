@@ -116,3 +116,4 @@ No evaluation metrics have been implemented in this module.
 ## Logistic regression
 ## General Linear Model
 ## Text Vectors
+No evaluation metrics have been implemented in this module.
