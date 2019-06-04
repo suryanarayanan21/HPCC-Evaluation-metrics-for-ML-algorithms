@@ -166,6 +166,6 @@ Return Deviance information for the null model, which is a model with only an in
 Logistic regression has similar metrics as those used in General Linear Model, as the general linear model is a superset of the logistic regression model. These metrics are just fine tuned to work better with Logistic regression.
 
 ## K-Means
-No evaluation metrics have been implemented in this module.
+No evaluation metrics found in this module.
 ## Text Vectors
-No evaluation metrics have been implemented in this module.
+No evaluation metrics found in this module.
