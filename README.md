@@ -132,6 +132,35 @@ Uniqueness Factor is an experimental metric that determines how far a given poin
 #### Decision distance matrix
 #### Accuracy
 ## Logistic regression
+#### Binomial Confusion matrix
+Computes the confusion matrix for a single response. Work items with multinomial responses are ignored by this function.
+#### Confusion matrix
+Computes the confusion matrix.
+#### Deviance analysis
+Analysis of deviance report. It compares the deviance information between two models, one base and the other proposed. It is analogous to the ANOVA report generated for the Least squares model. Metrics measured are as follows.
+
+| Metrics |
+| --- |
+| Deviance |
+| Residual deviance |
+| P-value |
+| Degrees of freedom |
+| residual degrees of freedom |
+
+#### Deviance detail
+Deviance detail report. Provides deviance information for each observation.
+
+#### Model deviance
+Creates a report of deviance for a model, in the deviance detail format.
+
+| Deviance detail metrics |
+| --- |
+| Akaike Information Criterion |
+| Degrees of freedom |
+| Deviance |
+
+#### Null deviance
+Return Deviance information for the null model, which is a model with only an intercept.
 ## General Linear Model
 ## K-Means
 No evaluation metrics have been implemented in this module.
