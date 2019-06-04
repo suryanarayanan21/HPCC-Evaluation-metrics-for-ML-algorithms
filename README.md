@@ -1,8 +1,11 @@
 # HPCC Evaluation metrics for ML algorithms
+
 Evaluation metrics that may be used to monitor the performance of Machine Learning algorithms used by the HPCC production ML bundles.
 The code is written in ECL, the language used by the HPCC framework.
+
 # Summary of existing Evaluation Metrics
 ## Overview
+
 | Module | Type | Metrics |
 | --- | --- | --- |
 | ML Core | Classification | Class Stats \| Confusion matrix \| Accuracy \| Accuracy by class |
@@ -15,6 +18,8 @@ The code is written in ECL, the language used by the HPCC framework.
 | | Classification forests | Accuracy \| Accuracy by class \| Feature importance \| Decision distance matrix \| Confusion matrix \| Uniqueness factor |
 | | Learning forests | Feature importance \| Uniqueness factor \| Decision distance matrix |
 | | Regression forests | Feature importance \| Uniqueness factor \| Decision distance matrix \| Accuracy |
+| K-Means | | - |
+| Text Vectors | | - |
 ## General ML Core module
 ### Classification
 #### Class stats
