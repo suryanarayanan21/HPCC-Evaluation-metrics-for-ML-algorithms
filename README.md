@@ -111,7 +111,8 @@ Uniqueness Factor is an experimental metric that determines how far a given poin
 #### Uniqueness factor
 #### Decision distance matrix
 #### Accuracy
+## K-Means
+No evaluation metrics have been implemented in this module.
 ## Logistic regression
 ## General Linear Model
-## K-Means
 ## Text Vectors
