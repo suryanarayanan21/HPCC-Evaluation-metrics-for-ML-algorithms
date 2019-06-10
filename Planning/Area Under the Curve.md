@@ -16,4 +16,5 @@ DATASET(Raw_Prediction) predicted_raw - The raw predictions (logit scores) obtai
 DATASET(DiscreteField) actual - The actual or real values of the fields the model tried to predict
 ### Return value
 {INTEGER wi, INTEGER regressor, REAL8 value} AUC - The area under the curve, per regressor, per work item.
+
 *Alternatively, in view of convenience, the **DATASET(Raw_Prediction)** may be changed to **DATASET(Classify_Result)** and the raw values may be calculated from the prediction and confidence values as an additional step.*
