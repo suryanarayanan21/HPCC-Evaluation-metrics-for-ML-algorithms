@@ -7,10 +7,14 @@ The area under the ROC curve can be used as a measure of how well the model clas
 
 This feature will be used to calculate the value of the metric.
 ## Design of the implementation
+
 | Item | Values |
 | --- | --- |
 | Parameters | DATASET(Raw_Prediction) predicted_raw, DATASET(DiscreteField) actual |
 | Returned values | {INTEGER wi, INTEGER regressor, REAL8 value} AUC |
+
+### Proposed location
+Logistic regression bundle. (As this metric can only be used when the probability / confidence of the classification is available)
 ### Parameters
 DATASET(Raw_Prediction) predicted_raw - The raw predictions (logit scores) obtained from LogitScore
 DATASET(DiscreteField) actual - The actual or real values of the fields the model tried to predict
