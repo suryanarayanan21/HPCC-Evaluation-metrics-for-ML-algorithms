@@ -25,15 +25,27 @@ DATASET(DiscreteField) actual - Actual values of the values to be predicted
 TABLE({UNSIGNED2 wi, UNSIGNED4 classifier, INTEGER4 class, REAL8 fscore}) - Table containing the fscore per work item, per classifier
 ### Dependencies
 ML_Core.Types
+
 ML_Core
 ## Implementation
 The precision and recall values may be obtained from the ML_Core.Analysis.Classification.AccuracyByClass function.
+
 The f-score may be obtained as a simple projection of the result of AccuracyByClass
 
 ~~~
-f_Score := PROJECT(accuracyByClass, TRANSFORM({UNSIGNED2 wi, UNSIGNED4 classifier, INTEGER4 class, REAL8 fscore},
-                                              SELF.wi := LEFT.wi,
-                                              SELF.classifier := LEFT.classifier,
-                                              SELF.class := LEFT.class,
-                                              SELF.fscore := 2*(LEFT.precision*LEFT.recall)/(LEFT.precision + LEFT.recall)));
+Class_f_score := RECORD
+  UNSIGNED2 wi;
+  UNSIGNED4 classifier;
+  INTEGER4 class;
+  REAL8 fscore;
+END;
+
+Class_f_score fScoreTransform(abc) := TRANSFORM
+  SELF.wi := abc.wi;
+  SELF.classifier := abc.classifier;
+  SELF.class := abc.class;
+  SELF.fscore := 2*(abc.precision*abc.recall)/(abc.precision + abc.recall);
+END;
+
+f_Score := PROJECT(accuracyByClass, fScoreTransform(LEFT));
 ~~~
