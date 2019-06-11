@@ -20,6 +20,7 @@ The recall is the ratio of the diagonal element to the column (row) sum dependin
 ML_Core.Analysis.Classification, as it can be used with all classification algorithms and only requires the confusion matrix which is part of the same module.
 ### Parameters
 DATASET(DiscreteField) predicted - Predicted values produced by the model
+
 DATASET(DiscreteField) actual - Actual values of the values to be predicted
 ### Return value
 TABLE({UNSIGNED2 wi, UNSIGNED4 classifier, INTEGER4 class, REAL8 fscore}) - Table containing the fscore per work item, per classifier
