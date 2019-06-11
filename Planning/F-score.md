@@ -7,7 +7,9 @@ The traditional F-measure or balanced F-score (F1 score) is the harmonic mean of
 While precision is the fraction of True positives among all predicted as positive, recall is the fraction of True positives among all the points that are truly (actually) positive.
 ## Calculation
 The F-score, or more specifically the precision and recall, can be obtained from the confusion matrix.
+
 The precision is the ratio of the diagonal element to the row (column) sum, and
+
 The recall is the ratio of the diagonal element to the column (row) sum depending on the orientation of the matrix.
 ## Design of implementation
 | Item | Values |
