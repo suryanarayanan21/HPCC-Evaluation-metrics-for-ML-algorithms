@@ -23,7 +23,7 @@ DATASET(DiscreteField) actual - The actual or real values of the fields the mode
 ### Return value
 {INTEGER wi, INTEGER regressor, REAL8 value} AUC - The area under the curve, per regressor, per work item.
 ### Implementation
-Since AUC is the probability that a random positive example is ranked higher than a random negative example, one way to calculate it would be to create a set of all positive-negative pairs (per work item, per regressor) and determine how many of them are *good* i.e, in how many of them the positive example is marked higher than the negative example.
+Since AUC is the probability that a random positive example is ranked higher than a random negative example, one way to calculate it would be to create a set of all positive-negative pairs (per work item, per regressor) and determine what fraction of them are *good* i.e, in how many of them the positive example is marked higher than the negative example.
 
 First, the raw predictions and their true classifications are combined for convenience.
 
