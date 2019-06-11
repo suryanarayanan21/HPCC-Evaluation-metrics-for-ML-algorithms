@@ -32,7 +32,7 @@ combined := JOIN(predicted_raw, actual,
                  LEFT.wi = RIGHT.wi and LEFT.number = RIGHT.number and LEFT.id = RIGHT.id);
 ~~~
 
-Next, the combined data is JOINed with itself to produce pairs. To eliminate duplicates and pairs of the same item, only positive examples are taken on the left, and only negative examples are taken on the right. This way, a pair *isGood* if the left's value is greater than the right's value. Since the join places a restriction on 'wi' and 'number', these pairs are formed only within work units and regressors.
+Next, the combined data is JOINed with itself to produce pairs. To eliminate duplicates and pairs of the same item, only positive examples are taken on the left, and only negative examples are taken on the right. This way, a pair *isGood* if the left's value is greater than the right's value. Since the join places a restriction on 'wi' and 'number', these pairs are formed only within the same work units *and* the same regressors.
 
 ~~~
 pairs := JOIN(combined, combined,
