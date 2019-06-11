@@ -32,7 +32,7 @@ Next, the combined data is JOINed with itself to produce pairs. To eliminate dup
 
 ~~~
 pairs := JOIN(combined, combined,
-              LEFT.wi = RIGHT.wi, LEFT.number = RIGHT.number, LEFT.raw = 1, RIGHT.raw = 0,
+              LEFT.wi = RIGHT.wi and LEFT.number = RIGHT.number and LEFT.raw = 1 and RIGHT.raw = 0,
               TRANSFORM({INTEGER wi, INTEGER regressor, BOOLEAN isGood},
                         SELF.wi = LEFT.wi,
                         SELF.regressor = LEFT.regressor,
