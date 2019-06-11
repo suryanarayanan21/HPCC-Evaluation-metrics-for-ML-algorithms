@@ -15,14 +15,25 @@ The recall is the ratio of the diagonal element to the column (row) sum dependin
 | Item | Values |
 | --- | --- |
 | Parameters | DATASET(DiscreteField) predicted, DATASET(DiscreteField) actual |
-| Return value | TABLE({ UNSIGNED2 wi , UNSIGNED4 classifier, REAL8 fscore }) |
+| Return value | TABLE({UNSIGNED2 wi, UNSIGNED4 classifier, INTEGER4 class, REAL8 fscore}) |
 ### Proposed Location
 ML_Core.Analysis.Classification, as it can be used with all classification algorithms and only requires the confusion matrix which is part of the same module.
 ### Parameters
 DATASET(DiscreteField) predicted - Predicted values produced by the model
 DATASET(DiscreteField) actual - Actual values of the values to be predicted
 ### Return value
-TABLE({ UNSIGNED2 wi , UNSIGNED4 classifier, REAL8 fscore }) - Table containing the fscore per work item, per classifier
+TABLE({UNSIGNED2 wi, UNSIGNED4 classifier, INTEGER4 class, REAL8 fscore}) - Table containing the fscore per work item, per classifier
 ### Dependencies
 ML_Core.Types
 ML_Core
+## Implementation
+The precision and recall values may be obtained from the ML_Core.Analysis.Classification.AccuracyByClass function.
+The f-score may be obtained as a simple projection of the result of AccuracyByClass
+
+~~~
+f_Score := PROJECT(accuracyByClass, TRANSFORM({UNSIGNED2 wi, UNSIGNED4 classifier, INTEGER4 class, REAL8 fscore},
+                                              SELF.wi := LEFT.wi,
+                                              SELF.classifier := LEFT.classifier,
+                                              SELF.class := LEFT.class,
+                                              SELF.fscore := 2*(LEFT.precision*LEFT.recall)/(LEFT.precision + LEFT.recall)));
+~~~
