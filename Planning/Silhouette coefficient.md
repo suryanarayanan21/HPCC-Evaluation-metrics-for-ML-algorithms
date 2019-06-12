@@ -15,6 +15,8 @@ The Silhouette score for each individual sample is calculated as follows. Let a 
 TABLE({UNSIGNED2 wi, UNSIGNED8 id, UNSIGNED8 label}) labels - The labels (closest cluster) assigned to the training samples as returned by KMeans.Labels
 
 DATASET(Types.NumericField) samples - The training samples used to train the model, as passed to KMeans.Fit
+
+*These parameters can also be any samples and their corresponding labelling, not necessarily the training samples.*
 ### Returns
 {UNSIGNED2 wi, UNSIGNED8 id, REAL8 s} - The silhouette coefficient per work unit, per cluster.
 ### Implemantation
