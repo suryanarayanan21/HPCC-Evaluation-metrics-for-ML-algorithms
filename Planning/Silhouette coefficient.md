@@ -52,7 +52,7 @@ a1 := JOIN(samples, samples,
  a2 := TABLE(a1, {wi,id1,id2,label,dist:=SQRT(SUM(GROUP,sq_diff))},wi,id1,id2,label);
  ~~~
  
- These distances are then averaged to finally get the a values
+ These distances are then averaged to finally get the a values.
  
  ~~~
  a3 := TABLE(a2, {wi, id:=id1, label,value:=AVE(GROUP,dist)}, wi,id1,label);
@@ -77,7 +77,7 @@ b1 := JOIN(samples, samples,
                      SELF.sq_diff := POWER(LEFT.value-RIGHT.value,2)));
 ~~~
 
-Now, the distances between these points is calculated
+Now, the distances between these points is calculated.
 
 ~~~
 b2 := TABLE(b1,
@@ -85,7 +85,7 @@ b2 := TABLE(b1,
             wi,id1,id2,Llabel,Rlabel);
 ~~~
 
-Now, the average distance of a sample, from all samples in each cluster is calculated
+Now, the average distance of a sample, from all samples in each cluster is calculated.
 
 ~~~
 b3 := TABLE(b2,
@@ -93,10 +93,28 @@ b3 := TABLE(b2,
             wi,id1,Llabel,Rlabel);
 ~~~
 
-The minimums among these values for every point are the required b values
+The minimums among these values for every point are the required b values.
 
 ~~~
 b4 := TABLE(b3,
             {wi,id,label:=Llabel,value:=MIN(GROUP,avgDist)},
             wi,id,Llabel);
+~~~
+#### Part 3 : Calculating the Silhouette coefficient
+To calculate the coefficient, the a and b values are used to find them, first for all samples, and then for each cluster.
+
+~~~
+sampleCoeffs := JOIN(a3,b4,
+                     LEFT.id=RIGHT.id and LEFT.wi=RIGHT.wi,
+                     TRANSFORM({INTEGER wi, INTEGER id, INTEGER label, REAL8 s},
+                               SELF.wi := LEFT.wi,
+                               SELF.id := LEFT.id,
+                               SELF.label := LEFT.label,
+                               SELF.value := (RIGHT.value-LEFT.value)/MAX(RIGHT.value,LEFT.value)));
+~~~
+
+These sample coefficients are averaged to form the coefficients for the cluster, which is the required result.
+
+~~~
+clusterCoeffs := TABLE(sampleCoeffs,{wi,label,s:=AVE(GROUP,value)},wi,label);
 ~~~
