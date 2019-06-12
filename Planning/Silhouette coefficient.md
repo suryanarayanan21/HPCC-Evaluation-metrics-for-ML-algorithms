@@ -28,7 +28,7 @@ For convenience, the samples and labels are JOINed to form a single dataset.
 points := JOIN(samples, labels,LEFT.wi = RIGHT.wi and LEFT.id = RIGHT.id);
 ~~~
 #### Part 1 : Calculating a value for all samples
-To calculate the a value for all samples, we first form all pairs of points within a cluster, and in the process find the square of the distance between their number values for each number (coordinate).
+To calculate the a value for all samples, all pairs of points within a cluster are formed, and in the process the square of the distance between their number values for each number (coordinate) is found.
 
 ~~~
 a1 := JOIN(samples, samples,
@@ -57,3 +57,46 @@ a1 := JOIN(samples, samples,
  ~~~
  a3 := TABLE(a2, {wi, id:=id1, label,value:=AVE(GROUP,dist)}, wi,id1,label);
  ~~~
+#### Part 2 : Calculating b value for all samples
+To calculate the b value for all samples, all pairs of points which do not belong to the same cluster are formed, and in the process the square of the distance between their values for each number is found.
+
+~~~
+b1 := JOIN(samples, samples,
+           LEFT.wi=RIGHT.wi and
+           LEFT.number=RIGHT.number and
+           LEFT.id <> RIGHT.id,
+           LEFT.label <> RIGHT.label,
+           TRANSFORM({INTEGER wi, INTEGER id1, INTEGER id2, INTEGER Llabel,
+                      INTEGER number, INTEGER Rlabel, REAL8 sq_diff},
+                     SELF.wi := LEFT.wi,
+                     SELF.id1 := LEFT.id,
+                     SELF.id2 := RIGHT.id,
+                     SELF.number := LEFT.number,
+                     SELF.Llabel := LEFT.label,
+                     SELF.Rlabel := RIGHT.label,
+                     SELF.sq_diff := POWER(LEFT.value-RIGHT.value,2)));
+~~~
+
+Now, the distances between these points is calculated
+
+~~~
+b2 := TABLE(b1,
+            {wi,id1,id2,Llabel,Rlabel,dist:=SQRT(SUM(GROUP,sq_diff))},
+            wi,id1,id2,Llabel,Rlabel);
+~~~
+
+Now, the average distance of a sample, from all samples in each cluster is calculated
+
+~~~
+b3 := TABLE(b2,
+            {wi,id:=id1,Llabel,Rlabel,avgDist:=AVE(GROUP,dist)},
+            wi,id1,Llabel,Rlabel);
+~~~
+
+The minimums among these values for every point are the required b values
+
+~~~
+b4 := TABLE(b3,
+            {wi,id,label:=Llabel,value:=MIN(GROUP,avgDist)},
+            wi,id,Llabel);
+~~~
