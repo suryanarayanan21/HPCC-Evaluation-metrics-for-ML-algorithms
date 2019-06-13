@@ -11,4 +11,3 @@ Currently, this list is a collection of candidate evaluation metrics that must b
 | Clustering | Adjusted Rand Index ([Source](https://scikit-learn.org/stable/modules/clustering.html#adjusted-rand-index)) ([more](https://scikit-learn.org/stable/modules/clustering.html#clustering-performance-evaluation)) |
 | Clustering | Silhouette Analysis ([more](https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_silhouette_analysis.html)) |
 | Feature Selection | Chi squared feature test |
-| Feature Selection | Pearson's correlation test |
