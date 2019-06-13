@@ -6,3 +6,4 @@ The contingency table represents the number of samples present in the data for e
 ## Chi2 value and Null hypothesis testing
 In the Chi2 test, we first assume the null hypothesis that the two variables are independent. We then proceed to construct a contingency table that supports this claim, based off of the sums of rows and columns of our existing contingency table. We then calculate the chi2 value as
 
+![chi2](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/Planning/img/Chi2.svg)
