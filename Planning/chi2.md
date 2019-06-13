@@ -46,3 +46,18 @@ This combined data is then grouped using the table functionality to obtain the c
 ct := TABLE(combined, {wi,fnumber,snumber,fclass,sclass,cnt:=COUNT(GROUP)},
             wi,fnumber,snumber,fclass,sclass);
 ~~~
+### Chi2
+| Item | Values |
+| --- | --- |
+| Parameter | DATASET(DiscreteField) samples, DATASET(DiscreteField) features |
+| Returns | TABLE({UNSIGNED2 wi, UNSIGNED4 fnumber, UNSIGNED4 snumber, REAL8 chi2}) |
+#### Parameters
+DATASET(DiscreteField) samples - The classifiers which are categorical (dependent data)
+
+DATASET(DiscreteField) features - The features which are also categorical (independent data)
+#### Returns
+TABLE({UNSIGNED2 wi, UNSIGNED4 fnumber, UNSIGNED4 snumber, REAL8 chi2}) - The chi2 value per work item for each combination of feature and classifier.
+#### Implementation
+To obtain the chi2 values, the expected contingency table of the data is formed based on the null hypothesis that the data is independent and the existing contingency table of the data (ct).
+
+The expected value for a cell is as follows, where Eij is a cell of the expected contingency table and Oij is a cell of the observed contingency table.
