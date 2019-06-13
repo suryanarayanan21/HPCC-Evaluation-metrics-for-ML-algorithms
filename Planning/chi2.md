@@ -61,3 +61,55 @@ TABLE({UNSIGNED2 wi, UNSIGNED4 fnumber, UNSIGNED4 snumber, REAL8 chi2}) - The ch
 To obtain the chi2 values, the expected contingency table of the data is formed based on the null hypothesis that the data is independent and the existing contingency table of the data (ct).
 
 The expected value for a cell is as follows, where Eij is a cell of the expected contingency table and Oij is a cell of the observed contingency table.
+
+![expected](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/Planning/img/chi2exp.svg)
+
+To achieve this, the row and column (i.e, the feature and sample) sums, as well as the whole sum, are first calculated from the contingency table.
+
+~~~
+featureSums := TABLE(ct, {wi,fnumber,snumber,fclass,cnt:=COUNT(GROUP)},wi,fnumber,snumber,fclass);
+
+sampleSums := TABLE(ct, {wi,fnumber,snumber,sclass,cnt:=COUNT(GROUP)},wi,fnumber,snumber,sclass);
+
+allSum := TABLE(ct, {wi,fnumber,snumber,cnt:=COUNT(GROUP)},wi,fnumber,snumber);
+~~~
+
+These are then used to find the expected contingency table ex, using two JOINs
+
+~~~
+ex1 := JOIN(featureSums, sampleSums,
+            LEFT.wi=RIGHT.wi and LEFT.fnumber=RIGHT.fnumber and LEFT.snumber=RIGHT.snumber,
+            TRANSFORM({INTEGER wi, INTEGER fnumber, INTEGER snumber, 
+                       INTEGER fclass, INTEGER sclass, REAL8 value},
+                      SELF.wi := LEFT.wi,
+                      SELF.value := LEFT.cnt * RIGHT.cnt,
+                      SELF.fnumber := LEFT.fnumber,
+                      SELF.snumber := LEFT.snumber,
+                      SELF.fclass := LEFT.fclass,
+                      SELF.sclass := RIGHT.sclass));
+
+ex2 := JOIN(ex1, allSum,
+            LEFT.wi=RIGHT.wi and LEFT.fnumber=RIGHT.fnumber and LEFT.snumber=RIGHT.snumber,
+            TRANSFORM(RECORDOF(ex1),
+                      SELF.value := LEFT.value/RIGHT.cnt,
+                      SELF := LEFT));
+~~~
+
+The two contingency tables are now used to calculate the chi2 values, first for each cell of the table, and then grouped for each table.
+
+Here, the **LEFT OUTER** JOIN flag is used. This is because the contingency table obtained (ct) does not contain entries for combinations where no samples are available (i.e, when cnt = 0). However, the expected contingency table contains entries for all combinations of sample and feature classes due to the nature of its construction. Hence the OUTER condition is used to produce entries for all combinations of sample and feature classes.
+
+chi2 is the required coefficient value for each combination of feature and classifier, per work item.
+~~~
+chi2_1 := JOIN(ex2, ct,
+               LEFT.wi=RIGHT.wi and
+               LEFT.fnumber=RIGHT.fnumber and
+               LEFT.snumber=RIGHT.snumber and
+               LEFT.fclass=RIGHT.fclass and
+               LEFT.sclass=RIGHT.sclass,
+               TRANSFORM(RECORDOF(ex2),
+                         SELF.value := POWER(RIGHT.value-LEFT.value,2)/LEFT.value,
+                         SELF := LEFT), LEFT OUTER);
+
+chi2 := TABLE(chi2_1, {wi,fnumber,snumber,x2:=SUM(GROUP,value)},wi,fnumber,snumber);
+~~~
