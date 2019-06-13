@@ -17,10 +17,32 @@ The implementation consists of two separate functionalities. The first is to cre
 | Item | Values |
 | --- | --- |
 | Parameter | DATASET(DiscreteField) samples, DATASET(DiscreteField) features |
-| Returns | TABLE({UNSIGNED2 wi, UNSIGNED4 fnumber, UNSIGNED4 snumber, INTEGER4 fclass, INTEGER4 sclass, UNSIGNED8 count}) |
+| Returns | TABLE({UNSIGNED2 wi, UNSIGNED4 fnumber, UNSIGNED4 snumber, INTEGER4 fclass, INTEGER4 sclass, UNSIGNED8 cnt}) |
 #### Parameters
 DATASET(DiscreteField) samples - The classifiers which are categorical (dependent data)
 
 DATASET(DiscreteField) features - The features which are also categorical (independent data)
 #### Returns
-TABLE({UNSIGNED2 wi, UNSIGNED4 fnumber, UNSIGNED4 snumber, INTEGER4 fclass, INTEGER4 sclass, UNSIGNED8 count}) - The contingency tables per work item for each combination of feature and classifier.
+TABLE({UNSIGNED2 wi, UNSIGNED4 fnumber, UNSIGNED4 snumber, INTEGER4 fclass, INTEGER4 sclass, UNSIGNED8 cnt}) - The contingency tables per work item for each combination of feature and classifier.
+#### Implementation
+To obtain the contingency tables, the samples and features are first combined into a single table, with every feature mapped to every classifier.
+
+~~~
+combined := JOIN(samples, features,
+                 LEFT.wi=RIGHT.wi and LEFT.id=RIGHT.id,
+                 TRANSFORM({INTEGER wi, INTEGER id, INTEGER fnumber,
+                            INTEGER snumber, INTEGER fclass, INTEGER sclass},
+                           SELF.wi := LEFT.wi,
+                           SELF.id := LEFT.id,
+                           SELF.fnumber := RIGHT.number,
+                           SELF.snumber := LEFT.number,
+                           SELF.fclass := RIGHT.value,
+                           SELF.sclass := LEFT.value));
+~~~
+
+This combined data is then grouped using the table functionality to obtain the contingency tables.
+
+~~~
+ct := TABLE(combined, {wi,fnumber,snumber,fclass,sclass,cnt:=COUNT(GROUP)},
+            wi,fnumber,snumber,fclass,sclass);
+~~~
