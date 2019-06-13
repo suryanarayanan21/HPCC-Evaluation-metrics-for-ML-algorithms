@@ -11,6 +11,8 @@ In the Chi2 test, we first assume the null hypothesis that the two variables are
 For a large population, the propability distribution of this value for a random sampling (small subset) of the population is known to approximately follow a chi2 distribution, and hence the name of the coefficient. A large value of chi2 indicates that it is **less probable** that the sample is **not an outlier** and represents the population well.
 
 Hence, when the null hypothesis that the sample is independent of a feature produces a large chi2 value, it indicates that there is a low probability that the null hypothesis is true and hence **null hypothesis is rejected** and the dependence of the two variables is established. A lower chi2 value indicates that it is more probable that the null hypothesis is true. It is not known for certain, however **the null hypothesis cannot be rejected** and the dependence of the variables cannot be established.
+### Level of significance and critical value
+The level of significance used is the highest probability of correctness of a hypothesis that can be rejected. For example, at 5% level of significance, a null hypothesis that has 0-5% chance of being correct is rejected. The corresponding value of chi2 for a given level of significance is called the critical value, and can be found using the level of significance and the number of degrees of freedom of the data.
 ## Design of implementation
 The implementation consists of two separate functionalities. The first is to create a contingency table of the data, and the second to find the chi2 values.
 ### Contingency table
@@ -50,13 +52,13 @@ ct := TABLE(combined, {wi,fnumber,snumber,fclass,sclass,cnt:=COUNT(GROUP)},
 | Item | Values |
 | --- | --- |
 | Parameter | DATASET(DiscreteField) samples, DATASET(DiscreteField) features |
-| Returns | TABLE({UNSIGNED2 wi, UNSIGNED4 fnumber, UNSIGNED4 snumber, REAL8 chi2}) |
+| Returns | TABLE({UNSIGNED2 wi, UNSIGNED4 fnumber, UNSIGNED4 snumber, REAL8 chi2, UNSIGNED8 dof}) |
 #### Parameters
 **DATASET(DiscreteField) samples** - The classifiers which are categorical (dependent data)
 
 **DATASET(DiscreteField) features** - The features which are also categorical (independent data)
 #### Returns
-**TABLE({UNSIGNED2 wi, UNSIGNED4 fnumber, UNSIGNED4 snumber, REAL8 chi2})** - The chi2 value per work item for each combination of feature (fnumber) and classifier (snumber).
+**TABLE({UNSIGNED2 wi, UNSIGNED4 fnumber, UNSIGNED4 snumber, REAL8 chi2, UNSIGNED8 dof})** - The chi2 value and degrees of freedom per work item for each combination of feature (fnumber) and classifier (snumber).
 #### Implementation
 To obtain the chi2 values, the expected contingency table of the data is formed based on the null hypothesis that the data is independent and the existing contingency table of the data (ct).
 
@@ -95,11 +97,28 @@ ex2 := JOIN(ex1, allSum,
                       SELF := LEFT));
 ~~~
 
+The number of degrees of freedom are calculated by preforming groupings on the row and column sums. The number of degrees of freedom is calculated as the number of (rows -1)\*(cols - 1).
+
+~~~
+dof1 := TABLE(featureSums, {wi,fnumber,snumber,d:=COUNT(GROUP)-1}, wi, fnumber,snumber);
+dof2 := TABLE(sampleSums, {wi,fnumber,snumber,d:=COUNT(GROUP)-1}, wi, fnumber,snumber);
+dof := JOIN(dof1,dof2, 
+            LEFT.wi=RIGHT.wi and
+            LEFT.fnumber=RIGHT.fnumber and
+            LEFT.snumber=RIGHT.snumber,
+            TRANSFORM(RECORDOF(dof1),
+                      SELF.d := LEFT.d*RIGHT.d,
+                      SELF := LEFT));
+~~~
+
 The two contingency tables are now used to calculate the chi2 values, first for each cell of the table, and then grouped for each table.
 
 Here, the **LEFT OUTER** JOIN flag is used. This is because the contingency table obtained (ct) does not contain entries for combinations where no samples are available (i.e, when cnt = 0). However, the expected contingency table contains entries for all combinations of sample and feature classes due to the nature of its construction. Hence the OUTER condition is used to produce entries for all combinations of sample and feature classes.
 
-chi2 is the required coefficient value for each combination of feature and classifier, per work item.
+chi2_2 is the required coefficient value for each combination of feature and classifier, per work item.
+
+This is then combined with the computed dof values to give the final result.
+
 ~~~
 chi2_1 := JOIN(ex2, ct,
                LEFT.wi=RIGHT.wi and
@@ -111,5 +130,8 @@ chi2_1 := JOIN(ex2, ct,
                          SELF.value := POWER(RIGHT.value-LEFT.value,2)/LEFT.value,
                          SELF := LEFT), LEFT OUTER);
 
-chi2 := TABLE(chi2_1, {wi,fnumber,snumber,x2:=SUM(GROUP,value)},wi,fnumber,snumber);
+chi2_2 := TABLE(chi2_1, {wi,fnumber,snumber,x2:=SUM(GROUP,value)},wi,fnumber,snumber);
+
+chi2 := JOIN(chi2_2, dof, 
+             LEFT.wi=RIGHT.wi and LEFT.fnumber=RIGHT.fnumber and LEFT.snumber=RIGHT.snumber);
 ~~~
