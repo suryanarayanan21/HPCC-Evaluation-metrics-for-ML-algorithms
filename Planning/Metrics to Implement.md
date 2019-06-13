@@ -10,4 +10,5 @@ Currently, this list is a collection of candidate evaluation metrics that must b
 | Multilabel classification | Hamming Loss |
 | Clustering | Adjusted Rand Index ([Source](https://scikit-learn.org/stable/modules/clustering.html#adjusted-rand-index)) ([more](https://scikit-learn.org/stable/modules/clustering.html#clustering-performance-evaluation)) |
 | Clustering | Silhouette Analysis ([more](https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_silhouette_analysis.html)) |
+| Clustering | Sum of Squared Errors (SSE) |
 | Feature Selection | Chi squared feature test |
