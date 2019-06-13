@@ -19,11 +19,11 @@ The implementation consists of two separate functionalities. The first is to cre
 | Parameter | DATASET(DiscreteField) samples, DATASET(DiscreteField) features |
 | Returns | TABLE({UNSIGNED2 wi, UNSIGNED4 fnumber, UNSIGNED4 snumber, INTEGER4 fclass, INTEGER4 sclass, UNSIGNED8 cnt}) |
 #### Parameters
-DATASET(DiscreteField) samples - The classifiers which are categorical (dependent data)
+**DATASET(DiscreteField) samples** - The classifiers which are categorical (dependent data)
 
-DATASET(DiscreteField) features - The features which are also categorical (independent data)
+**DATASET(DiscreteField) features** - The features which are also categorical (independent data)
 #### Returns
-TABLE({UNSIGNED2 wi, UNSIGNED4 fnumber, UNSIGNED4 snumber, INTEGER4 fclass, INTEGER4 sclass, UNSIGNED8 cnt}) - The contingency tables per work item for each combination of feature (fnumber) and classifier (snumber).
+**TABLE({UNSIGNED2 wi, UNSIGNED4 fnumber, UNSIGNED4 snumber, INTEGER4 fclass, INTEGER4 sclass, UNSIGNED8 cnt})** - The contingency tables per work item for each combination of feature (fnumber) and classifier (snumber).
 #### Implementation
 To obtain the contingency tables, the samples and features are first combined into a single table, with every feature mapped to every classifier.
 
