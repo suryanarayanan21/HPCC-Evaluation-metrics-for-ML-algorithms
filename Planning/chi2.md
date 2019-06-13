@@ -23,7 +23,7 @@ DATASET(DiscreteField) samples - The classifiers which are categorical (dependen
 
 DATASET(DiscreteField) features - The features which are also categorical (independent data)
 #### Returns
-TABLE({UNSIGNED2 wi, UNSIGNED4 fnumber, UNSIGNED4 snumber, INTEGER4 fclass, INTEGER4 sclass, UNSIGNED8 cnt}) - The contingency tables per work item for each combination of feature and classifier.
+TABLE({UNSIGNED2 wi, UNSIGNED4 fnumber, UNSIGNED4 snumber, INTEGER4 fclass, INTEGER4 sclass, UNSIGNED8 cnt}) - The contingency tables per work item for each combination of feature (fnumber) and classifier (snumber).
 #### Implementation
 To obtain the contingency tables, the samples and features are first combined into a single table, with every feature mapped to every classifier.
 
@@ -52,11 +52,11 @@ ct := TABLE(combined, {wi,fnumber,snumber,fclass,sclass,cnt:=COUNT(GROUP)},
 | Parameter | DATASET(DiscreteField) samples, DATASET(DiscreteField) features |
 | Returns | TABLE({UNSIGNED2 wi, UNSIGNED4 fnumber, UNSIGNED4 snumber, REAL8 chi2}) |
 #### Parameters
-DATASET(DiscreteField) samples - The classifiers which are categorical (dependent data)
+**DATASET(DiscreteField) samples** - The classifiers which are categorical (dependent data)
 
-DATASET(DiscreteField) features - The features which are also categorical (independent data)
+**DATASET(DiscreteField) features** - The features which are also categorical (independent data)
 #### Returns
-TABLE({UNSIGNED2 wi, UNSIGNED4 fnumber, UNSIGNED4 snumber, REAL8 chi2}) - The chi2 value per work item for each combination of feature and classifier.
+**TABLE({UNSIGNED2 wi, UNSIGNED4 fnumber, UNSIGNED4 snumber, REAL8 chi2})** - The chi2 value per work item for each combination of feature (fnumber) and classifier (snumber).
 #### Implementation
 To obtain the chi2 values, the expected contingency table of the data is formed based on the null hypothesis that the data is independent and the existing contingency table of the data (ct).
 
