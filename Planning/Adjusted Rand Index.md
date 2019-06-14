@@ -25,3 +25,53 @@ From the table, ARI is calculated as:
 ### Returns
 **TABLE({UNSIGNED2 wi, REAL8 ari})** - The ARI per work unit
 ### Implementation
+First the contingency table of the given data is formed. In order to do this, the data is converted to the DiscreteField format and fed to the function proposed in the [chi2 proposal](https://github.com/suryanarayanan21/HPCC-Evaluation-metrics-for-ML-algorithms/blob/master/Planning/chi2.md).
+~~~
+conv1 := PROJECT(predicted, TRANSFORM(Types.DiscreteField,
+                                      SELF.wi := LEFT.wi,
+                                      SELF.number := 1,
+                                      SELF.id := LEFT.id,
+                                      SELF.value := LEFT.label));
+
+conv2 := PROJECT(true, TRANSFORM(Types.DiscreteField,
+                                 SELF.wi := LEFT.wi,
+                                 SELF.number := 1,
+                                 SELF.id := LEFT.id,
+                                 SELF.value := LEFT.label));
+
+ct := contingencyTable(conv1, conv2);
+~~~
+Next, the three sums required by ARI are calculated.
+~~~
+
+rowSumsC2 := TABLE(ct, {wi, fclass, c:=SUM(GROUP,cnt)*(SUM(GROUP,cnt)-1)/2}, wi, fclass);
+colSumsC2 := TABLE(ct, {wi, sclass, c:=SUM(GROUP,cnt)*(SUM(GROUP,cnt)-1)/2}, wi, sclass);
+allSumC2 := TABLE(ct, {wi, value:=SUM(GROUP,cnt)*(SUM(GROUP,cnt)-1)/2}, wi);
+
+a := TABLE(rowSumsC2, {wi, value:=SUM(GROUP,c)}, wi);
+b := TABLE(colSumsC2, {wi, value:=SUM(GROUP,c)}, wi);
+
+ct1 := PROJECT(ct, TRANSFORM(REORDOF(ct),
+                             SELF.cnt := LEFT.cnt*(LEFT.cnt-1)/2,
+                             SELF := LEFT));
+
+nij := TABLE(ct1(fclass=sclass), {wi, value:=SUM(GROUP,cnt)}, wi);
+~~~
+Using these three values, ARI is calculated.
+
+ari1 is the required ARI per work item.
+~~~
+ari := JOIN([a,b,nij,allSumC2],
+            LEFT.wi = RIGHT.wi,
+            TRANSFORM({INTEGER wi, INTEGER a, INTEGER b,
+                       INTEGER nij, INTEGER n, REAL8 value},
+                      SELF.wi := LEFT.wi,
+                      SELF.a := ROWS(LEFT)[1].value,
+                      SELF.b := ROWS(LEFT)[2].value,
+                      SELF.nij := ROWS(LEFT)[3].value,
+                      SELF.n := ROWS(LEFT)[4].value,
+                      SELF.value := (SELF.nij - SELF.a*SELF.b/SELF.n)/
+                                    (0.5*(SELF.a + SELF.b) - SELF.a*SELF.b/SELF.n)));
+
+ari1 := TABLE(ari,{wi,value});
+~~~
