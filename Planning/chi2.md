@@ -69,11 +69,11 @@ The expected value for a cell is as follows, where Eij is a cell of the expected
 To achieve this, the row and column (i.e, the feature and sample) sums, as well as the whole sum, are first calculated from the contingency table.
 
 ~~~
-featureSums := TABLE(ct, {wi,fnumber,snumber,fclass,cnt:=COUNT(GROUP)},wi,fnumber,snumber,fclass);
+featureSums := TABLE(ct, {wi,fnumber,snumber,fclass,cnt:=SUM(GROUP,cnt)},wi,fnumber,snumber,fclass);
 
-sampleSums := TABLE(ct, {wi,fnumber,snumber,sclass,cnt:=COUNT(GROUP)},wi,fnumber,snumber,sclass);
+sampleSums := TABLE(ct, {wi,fnumber,snumber,sclass,cnt:=SUM(GROUP,cnt)},wi,fnumber,snumber,sclass);
 
-allSum := TABLE(ct, {wi,fnumber,snumber,cnt:=COUNT(GROUP)},wi,fnumber,snumber);
+allSum := TABLE(ct, {wi,fnumber,snumber,cnt:=SUM(GROUP,cnt)},wi,fnumber,snumber);
 ~~~
 
 These are then used to find the expected contingency table ex, using two JOINs
